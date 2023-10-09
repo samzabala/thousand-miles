@@ -56,11 +56,11 @@ export default function Ui(){
 			<div className="raw">
 			</div>
 			<div className="raw">
-				<div className={ `key forwards  ${ forward ? 'active' : '' }` }></div>
-				<div className={ `key left  ${ leftward ? 'active' : '' }` }></div>
-				<div className={ `key backwards  ${ backward ? 'active' : '' }` }></div>
-				<div className={ `key right  ${ rightward ? 'active' : '' }` }></div>
-				<div className={ `key jump  ${ jump ? 'active' : '' }` }></div>
+				<div className={ `key forwards  ${ forward ? 'active' : '' }` }>&uarr;</div>
+				<div className={ `key left  ${ leftward ? 'active' : '' }` }>&larr;</div>
+				<div className={ `key backwards  ${ backward ? 'active' : '' }` }>&darr;</div>
+				<div className={ `key right  ${ rightward ? 'active' : '' }` }>&rarr;</div>
+				<div className={ `key jump  ${ jump ? 'active' : '' }` }>[SPACE]</div>
 			</div>
 		</div>
     </div>

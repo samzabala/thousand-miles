@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import {useState,useRef, useEffect} from 'react'
 import {CuboidCollider,useRapier,RigidBody,BallCollider} from '@react-three/rapier'
 import {useFrame} from '@react-three/fiber'
-import {useKeyboardControls,useGLTF} from '@react-three/drei'
+import {useProgress,useKeyboardControls,useGLTF} from '@react-three/drei'
 import useGame from '../stores/useGame.jsx'
 
 export default function Player(){
@@ -132,41 +132,43 @@ export default function Player(){
     const restart = useGame((state) => state.restart)
     const blocksCount = useGame((state) => state.blocksCount)
 
+	const { progress } = useProgress()
 
 	// //para daw di natiotrigger twice
 	useEffect(()=>{
+		if(progress >= 100) {
+			const unsubscribeReset = useGame.subscribe(
+				(state) => state.phase,
+				(value) => {
+					console.log('phase changes to', value)
 
-		const unsubscribeReset = useGame.subscribe(
-			(state) => state.phase,
-			(value) => {
-                console.log('phase changes to', value)
-
-                if(value === 'ready')
-                    reset()
-			}
-		)
+					if(value === 'ready')
+						reset()
+				}
+			)
 
 
-		const unsubscribeJump = subscribeKeys(
-			(state)=>{
-				return state.jump
-			},
-			(value)=>{
-				value && jump()
-			}
-		)
+			const unsubscribeJump = subscribeKeys(
+				(state)=>{
+					return state.jump
+				},
+				(value)=>{
+					value && jump()
+				}
+			)
 
-        
-		const unsubscribeAny = subscribeKeys(()=>{
-			start()
-		})
+			
+			const unsubscribeAny = subscribeKeys(()=>{
+				start()
+			})
 
-		return(()=>{
-			unsubscribeJump()
-			unsubscribeAny()
-			unsubscribeReset()
-		})
-	},[])
+			return(()=>{
+				unsubscribeJump()
+				unsubscribeAny()
+				unsubscribeReset()
+			})
+		}
+	},[progress])
 
 
 
