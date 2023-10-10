@@ -5,7 +5,7 @@ export default function Credits(){
 			Music is... you know what is... <a href="hhttps://open.spotify.com/track/4w1lzcaoZ1IC2K5TwjalRP?si=7914bd3650434d09" target="_blank">A Thousand Miles by Vanessa Carlton</a>. Duh.
 		</p>
 		<p>
-			Burger Model by the dude who let me get a certificate to create this sin <a href="https://bruno-simon.com/" target="_blank">Bruno Simon</a>
+			Burger Model by the talented dude whom I have inherited the wisdom to create... whatever this is <a href="https://bruno-simon.com/" target="_blank">Bruno Simon</a>
 		</p>
 		<p>
 			Shrek Model by <a href="https://sketchfab.com/3d-models/shrek-walk-cycle-cd5a1e1cd7dd4effa3df11bcaea915f4" target="_blank">This guy... idk his name</a>

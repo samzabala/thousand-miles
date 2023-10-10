@@ -11,6 +11,8 @@ export default function Ui(){
     const rightward = useKeyboardControls((state) => state.rightward)
     const jump = useKeyboardControls((state) => state.jump)
 
+	const [triggerState,trigger] = useKeyboardControls()
+
     const phase = useGame((state) => state.phase)
     const restart = useGame((state) => state.restart)
 
@@ -49,18 +51,27 @@ export default function Ui(){
     return <div className="interface">
     {/* Time */}
     <div ref={time} className="time">0.00</div>
-		{ phase === 'ended' ? <button className="restart" onClick={ restart }>Again</button> : null }
+		{ (phase === 'ended' || phase === 'won')
+			? <button className="restart" onClick={ restart }>
+				{ phase == 'won' 
+					? <>
+					You can stop now god get a life <br />
+					<small>(Or you can start from scratch again if you like to suffer)</small>
+					</>
+					: 'You Want More?'
+				}
+			</button>
+			: null
+		}
 
 		{/* Controls */}
 		<div className="controls">
 			<div className="raw">
-			</div>
-			<div className="raw">
-				<div className={ `key forwards  ${ forward ? 'active' : '' }` }>&uarr;</div>
-				<div className={ `key left  ${ leftward ? 'active' : '' }` }>&larr;</div>
-				<div className={ `key backwards  ${ backward ? 'active' : '' }` }>&darr;</div>
-				<div className={ `key right  ${ rightward ? 'active' : '' }` }>&rarr;</div>
-				<div className={ `key jump  ${ jump ? 'active' : '' }` }>[SPACE]</div>
+				<button onMouseDown={ () =>{  } } className={ `key forwards  ${ forward ? 'active' : '' }` }>&uarr;</button>
+				<button onMouseDown={ () =>{  } } className={ `key left  ${ leftward ? 'active' : '' }` }>&larr;</button>
+				<button onMouseDown={ () =>{  } } className={ `key backwards  ${ backward ? 'active' : '' }` }>&darr;</button>
+				<button onMouseDown={ () =>{  } } className={ `key right  ${ rightward ? 'active' : '' }` }>&rarr;</button>
+				<button onMouseDown={ () =>{  } } className={ `key jump  ${ jump ? 'active' : '' }` }>[SPACE]</button>
 			</div>
 		</div>
     </div>

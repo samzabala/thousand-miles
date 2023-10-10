@@ -1,7 +1,8 @@
 import './style.css'
 import { Suspense } from 'react'
+import * as THREE from 'three'
 import ReactDOM from 'react-dom/client'
-import { KeyboardControls } from '@react-three/drei'
+import { KeyboardControls, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import Experience from './Experience.jsx'
 import Ui from './components/Ui.jsx'
@@ -11,6 +12,7 @@ const root = ReactDOM.createRoot(document.querySelector('#root'))
 
 root.render(
     <>
+    
     <KeyboardControls
         map={ [
             { name: 'forward', keys: [ 'ArrowUp', 'KeyW' ] },
@@ -21,6 +23,11 @@ root.render(
         ] }
     >
         <Canvas
+            // gl={ {
+            //     // antialias: true,
+            //     toneMapping: THREE.ACESFilmicToneMapping,
+            //     outputColorSpace: THREE.SRGBColorSpace
+            // }}
             shadows
             camera={ {
                 fov: 45,
@@ -29,6 +36,9 @@ root.render(
                 position: [ 2.5, 4, 6 ]
             } }
         >
+
+            {/* <OrbitControls  makeDefault /> */}
+
             <Suspense>
                 <Experience />
             </Suspense>

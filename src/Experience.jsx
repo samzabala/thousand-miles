@@ -1,4 +1,5 @@
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useMemo } from 'react'
+import * as THREE from 'three'
 import {Level,BlockAx,BlockSpinner,BlockLimbo} from './components/Level.jsx'
 import { Physics } from '@react-three/rapier'
 import Lights from './components/Lights.jsx'
@@ -12,22 +13,23 @@ export default function Experience() {
     ambience.muted = true
     ambience.volume = .8
 
-    let loopTimeout
+    let _loopAudio
 
     const loopAudio = () => {
         ambience.muted = false
         ambience.currentTime = 0;
         ambience.play();
-        loopTimeout = setTimeout(loopAudio, 10600);
+        _loopAudio = setTimeout(loopAudio, 10700);
 
     }
 
     const playAudio = () => {
         ambience.pause();
         ambience.muted = false
-        ambience.currentTime = 10.5
+        ambience.currentTime = 10.7
         ambience.play()
     }
+
 
 
     useEffect(()=>{
@@ -38,31 +40,29 @@ export default function Experience() {
                 console.log('phase changes to', value)
 
                 if(value === 'ready' ) {
-                    loopAudio()
-                } else {
-                    clearTimeout(loopTimeout);
-
-                }
+                    setTimeout(()=> loopAudio(),100)
+                } 
 
                 if(value === 'playing'){
                     playAudio()
+                    clearTimeout(_loopAudio);
                 } 
 			}
 		)
 
 		return(()=>{
+            clearTimeout(_loopAudio);
 			unsubscribePlayAudio()
 		})
 	},[])
 
     return <>
 
-        <color attach="background" args={ ['#bdedfc'] }/>
-
+        <color attach="background" args={ ['SkyBlue'] }/>
 
         <Lights />
         <Physics  >
-            <Level count={ blocksCount } types={ [BlockAx,BlockSpinner,BlockLimbo] } seed={ blocksSeed } />
+            <Level count={ blocksCount } types={ [BlockSpinner,BlockAx,BlockLimbo] } seed={ blocksSeed } />
         </Physics>
 
     </>
